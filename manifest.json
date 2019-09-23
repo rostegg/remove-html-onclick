@@ -1,0 +1,41 @@
+{
+    "manifest_version": 2,
+    "name": "Remove HTML elements",
+    "version": "1.0",
+   
+    "description": "",
+    "icons": {
+      "64": "icons/remove-selection.png"
+    },
+  
+    "applications": {
+      "gecko": {
+        "id": "remove-html-elements@mozilla.org",
+        "strict_min_version": "45.0"
+      }
+    },
+    "background": {
+        "scripts": ["src/browser-polyfill.js", "src/background.js"]
+    },
+    "commands": {
+      "enable-remove-mode": {
+        "suggested_key": { "default": "Alt+Shift+R" },
+        "description": "Enable remove mode"
+      },
+      "disable-remove-mode": {
+        "suggested_key": { "default": "Alt+Shift+D" },
+        "description": "Disable remove mode"
+      },
+      "restore-from-cache": {
+        "suggested_key": { "default": "Alt+Shift+Z" },
+        "description": "Restore last removed item"
+      }
+    },
+    "content_scripts": [
+      {
+        "matches": ["<all_urls>"],
+        "js": ["src/index.js"]
+      }
+    ],
+    "web_accessible_resources": ["icons/remove-selection.png", "icons/cursor.png"]
+  }

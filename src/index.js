@@ -1,5 +1,5 @@
 const eventHandler = (document.body || document.documentElement);
-// cursor image - flaticon.com
+// cursor image - https://www.flaticon.com/authors/those-icons
 const cursorIconUrl = browser.runtime.getURL('icons/cursor.png');
 
 let removedObjects = [];

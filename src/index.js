@@ -1,5 +1,5 @@
 const eventHandler = (document.body || document.documentElement);
-// cursor image - flaticon.com
+// cursor image - https://www.flaticon.com/authors/those-icons
 const cursorIconUrl = browser.runtime.getURL('icons/cursor.png');
 
 let removedObjects = [];
@@ -10,7 +10,7 @@ class RemovedObjectMetadata {
   constructor(target, parent, sibling) {
     this.target = target;
     this.parent = parent;
-    this.sibling =  sibling;
+    this.sibling = sibling;
   }
 }
 
@@ -42,20 +42,18 @@ function disableRemoveMode() {
 
 function restoreFromCache() {
   const elem = removedObjects.pop();
-  if (elem){
-    // if sibling eq null, insert at the end
-    elem.parent.insertBefore(elem.target, elem.sibling);
-  }
+  // if sibling eq null, insert at the end
+  elem && elem.parent.insertBefore(elem.target, elem.sibling);
 }
 
 function onClickEventHandler(event) {
-    event = event || window.event;
-    let target = event.target || event.srcElement,
-      parent = target.parentElement,
-      sibling = target.nextSibling;
-    removedObjects.push(new RemovedObjectMetadata(target,parent,sibling));
-    target.remove();
-    // stop propagation for click events
-    event.stopPropagation();
-    event.preventDefault();
+  event = event || window.event;
+  let target = event.target || event.srcElement,
+    parent = target.parentElement,
+    sibling = target.nextSibling;
+  removedObjects.push(new RemovedObjectMetadata(target,parent,sibling));
+  target.remove();
+  // stop propagation for click events
+  event.stopPropagation();
+  event.preventDefault();
 }

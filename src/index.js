@@ -25,6 +25,9 @@ mainPort.onMessage.addListener(function(message) {
     case "restore-from-cache":
       restoreFromCache();
       break;
+    case "enable-scrolling":
+      enablePageScrolling();
+      break;
     default:
         mainPort.postMessage("Unknown command")
   }
@@ -32,18 +35,22 @@ mainPort.onMessage.addListener(function(message) {
 
 function enableRemoveMode() {
   eventHandler.addEventListener('click', onClickEventHandler, true);
-  document.body.style.cursor = `url('${cursorIconUrl}'), pointer`;
+  eventHandler.style.cursor = `url('${cursorIconUrl}'), pointer`;
 }
 
 function disableRemoveMode() {
   eventHandler.removeEventListener('click', onClickEventHandler, true);
-  document.body.style.cursor = `default`;
+  eventHandler.style.cursor = `default`;
 }
 
 function restoreFromCache() {
   const elem = removedObjects.pop();
   // if sibling eq null, insert at the end
   elem && elem.parent.insertBefore(elem.target, elem.sibling);
+}
+
+function enablePageScrolling() {
+  eventHandler.style.overflow = "visible";
 }
 
 function onClickEventHandler(event) {

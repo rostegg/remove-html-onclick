@@ -29,6 +29,10 @@
       "restore-from-cache": {
         "suggested_key": { "default": "Alt+Shift+Z" },
         "description": "Restore last removed item"
+      },
+      "enable-scrolling": {
+        "suggested_key": { "default": "Alt+Shift+L" },
+        "description": "Restore 'overflow' field to visible"
       }
     },
     "content_scripts": [
